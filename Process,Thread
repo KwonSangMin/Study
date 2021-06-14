@@ -11,7 +11,7 @@ Process : 운영체제에서 자원을 할당 받아 실행중인 프로그램
 Thread : 프로세스의 실행 단위
 
 특징 : 기본적으로 프로세스당 1개 이상의 Thread가 존재하고, 프로세스에 의해 추가적으로 생성될 수 있다.
-      각 Threads는 PCB, HEAP, DATA, CODE 영역을 다른 Threads와 공유한다. (Program Counter와 Stack은 독립적) PC-> Thread 별로 독립된 실행을 가진다, Stack은 실행흐름에서 지역변수, 함수 콜스택 등을 저장한다. -> 독립 Stack -> 독립 실행 흐름 가능
+      각 Threads는 PCB, HEAP, DATA, CODE 영역을 다른 Threads와 공유한다. (Program Counter와 Stack은 독립적) PC-> Thread 별로 독립된 실행을 가진다, Stack은 실행흐름에서 지역변수, 함수 콜스택 등을 저장한다. -> 독립 Stack, PC Register -> 독립 실행 흐름 가능
       다른 Threads들과 메모리를 공유하기 때문에 통신이 빠르지만, 동일한 메모리에서 쓰기 작업을 할 경우 비 정상적인 결과 값이 나올 수 있으므로 Semaphore나 Lock을 활용하여 Critical Section을 설정하고 동시에 동일한 메모리에 작업하지 못하도록 해야한다. 또는 Atomic 키워드를 활용하여 명령어 실행시 매 번 메모리에서 읽고 쓰는 작업을 단위화 하여 해결 가능하다.
       멀티 스레드 방식은 Context Switching과 스레드 생성 및 종료 cost가 Process보다 적어 효율성에서는 멀티 프로세스보다 뛰어나다. 하지만, 실행 순서를 예측하기 어렵고 동일한 메모리에 대해서 읽기, 쓰기 작업을 2개 이상의 Thread가 실행할 경우 Race Condition과 Out of Order Execution 문제를 고려하여 동기화 작업을 해주어야 한다.
         - Race Condition이란 동일한 자원에 대해서 병행적으로(concurrently) 읽거나 쓰는 동작을 할 때, 공용 데이터에 대한 접근이 어떤 순서에 따라 이루어졌는지에 따라 그 실행 결과가 같지 않고 달라지는 상황을 말한다.
